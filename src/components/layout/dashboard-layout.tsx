@@ -1,0 +1,131 @@
+'use client';
+
+import { useState } from 'react';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import {
+  Bell,
+  BriefcaseBusiness,
+  Building2,
+  CreditCard,
+  LayoutDashboard,
+  Menu,
+  ReceiptText,
+  Settings,
+  ChevronDown,
+} from 'lucide-react';
+import { useAppDispatch, useAppSelector } from '@/src/redux/hooks';
+import { setActiveBusiness } from '@/src/redux/slices/businessesSlice';
+
+const navigation = [
+  { href: '/', label: 'Dashboard', icon: LayoutDashboard },
+  { href: '/businesses', label: 'Businesses', icon: Building2 },
+  { href: '/clients', label: 'Clients', icon: BriefcaseBusiness },
+  { href: '/invoices', label: 'Invoices', icon: ReceiptText },
+  { href: '/settings', label: 'Settings', icon: Settings },
+];
+
+export function DashboardLayout({ children }: { children: React.ReactNode }) {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const dispatch = useAppDispatch();
+  const pathname = usePathname();
+  const businesses = useAppSelector((state) => state.businesses.items);
+  const activeBusinessId = useAppSelector((state) => state.businesses.activeBusinessId);
+  const activeBusiness = businesses.find((business) => business.id === activeBusinessId) ?? businesses[0];
+
+  return (
+    <div className="min-h-screen bg-slate-950 text-slate-100">
+      <div className="flex min-h-screen flex-col lg:flex-row">
+        <aside className={`w-full border-b border-white/10 bg-slate-900/80 p-4 print:hidden lg:w-72 lg:border-b-0 lg:border-r ${isMenuOpen ? 'block' : 'hidden lg:block'}`}>
+          <div className="mb-8 flex items-center gap-3">
+            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-cyan-500/20 text-sm font-semibold text-cyan-300">
+              {activeBusiness?.logo ?? 'IN'}
+            </div>
+            <div>
+              <p className="text-sm font-semibold">InvoiceFlow</p>
+              <p className="text-xs text-slate-400">Operations Console</p>
+            </div>
+          </div>
+
+          <nav className="space-y-2">
+            {navigation.map((item) => {
+              const Icon = item.icon;
+              const isActive = pathname === item.href;
+
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className={`flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm transition ${
+                    isActive ? 'bg-cyan-500/20 text-cyan-300' : 'text-slate-300 hover:bg-white/5 hover:text-white'
+                  }`}
+                >
+                  <Icon className="h-4 w-4" />
+                  {item.label}
+                </Link>
+              );
+            })}
+          </nav>
+
+          <div className="mt-8 rounded-2xl border border-white/10 bg-slate-800/70 p-4">
+            <div className="flex items-center gap-2 text-sm font-medium text-slate-200">
+              <CreditCard className="h-4 w-4" />
+              Working Context
+            </div>
+            <p className="mt-2 text-sm text-slate-400">{activeBusiness?.companyName}</p>
+          </div>
+        </aside>
+
+        <div className="flex-1">
+          <header className="border-b border-white/10 bg-slate-900/70 px-4 py-4 backdrop-blur print:hidden lg:px-8">
+            <div className="flex flex-wrap items-center justify-between gap-4">
+              <div className="flex items-center gap-3">
+                <button
+                  onClick={() => setIsMenuOpen((value) => !value)}
+                  className="rounded-xl border border-white/10 p-2 text-slate-300 lg:hidden"
+                >
+                  <Menu className="h-4 w-4" />
+                </button>
+                <div>
+                  <p className="text-sm text-slate-400">Overview</p>
+                  <h1 className="text-xl font-semibold text-white">Invoice Management</h1>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-3">
+                <div className="relative">
+                  <button className="flex items-center gap-2 rounded-xl border border-white/10 bg-slate-800/80 px-3 py-2 text-sm text-slate-200">
+                    <BriefcaseBusiness className="h-4 w-4" />
+                    <span>{activeBusiness?.companyName}</span>
+                    <ChevronDown className="h-4 w-4" />
+                  </button>
+                  <div className="absolute right-0 mt-2 w-56 rounded-xl border border-white/10 bg-slate-900 p-2 shadow-xl">
+                    {businesses.map((business) => (
+                      <button
+                        key={business.id}
+                        onClick={() => dispatch(setActiveBusiness(business.id))}
+                        className={`flex w-full items-center justify-between rounded-lg px-3 py-2 text-left text-sm ${
+                          activeBusinessId === business.id ? 'bg-cyan-500/20 text-cyan-300' : 'text-slate-300 hover:bg-white/5'
+                        }`}
+                      >
+                        <span>{business.companyName}</span>
+                        <span className="text-xs text-slate-500">{business.defaultCurrency}</span>
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                <button className="relative rounded-xl border border-white/10 bg-slate-800/80 p-2 text-slate-200">
+                  <Bell className="h-4 w-4" />
+                  <span className="absolute right-1 top-1 h-2 w-2 rounded-full bg-cyan-400" />
+                </button>
+              </div>
+            </div>
+          </header>
+
+          <main className="p-4 print:p-0 lg:p-8">{children}</main>
+        </div>
+      </div>
+    </div>
+  );
+}
