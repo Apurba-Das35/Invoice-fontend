@@ -34,7 +34,7 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
   const activeBusiness = businesses.find((business) => business.id === activeBusinessId) ?? businesses[0];
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100">
+    <div className="min-h-screen bg-slate-950 text-slate-100 ">
       <div className="flex min-h-screen flex-col lg:flex-row">
         <aside className={`w-full border-b border-white/10 bg-slate-900/80 p-4 print:hidden lg:w-72 lg:border-b-0 lg:border-r ${isMenuOpen ? 'block' : 'hidden lg:block'}`}>
           <div className="mb-8 flex items-center gap-3">
@@ -92,7 +92,7 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
                 </div>
               </div>
 
-              <div className="flex items-center gap-3">
+              {/* <div className="flex items-center gap-3">
                 <div className="relative">
                   <button className="flex items-center gap-2 rounded-xl border border-white/10 bg-slate-800/80 px-3 py-2 text-sm text-slate-200">
                     <BriefcaseBusiness className="h-4 w-4" />
@@ -119,7 +119,7 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
                   <Bell className="h-4 w-4" />
                   <span className="absolute right-1 top-1 h-2 w-2 rounded-full bg-cyan-400" />
                 </button>
-              </div>
+              </div> */}
             </div>
           </header>
 

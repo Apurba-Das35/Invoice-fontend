@@ -244,7 +244,7 @@ export default function ClientsPage() {
                 <Input id="vatNumber" {...form.register('vatNumber')} />
                 {form.formState.errors.vatNumber ? <p className="text-sm text-rose-400">{form.formState.errors.vatNumber.message}</p> : null}
               </div>
-              <div className="space-y-2">
+              <div className="space-y-1">
                 <Label htmlFor="notes">Notes</Label>
                 <Textarea id="notes" {...form.register('notes')} />
                 {form.formState.errors.notes ? <p className="text-sm text-rose-400">{form.formState.errors.notes.message}</p> : null}

@@ -235,7 +235,7 @@ export default function BusinessesPage() {
                 {form.formState.errors.address ? <p className="text-sm text-rose-400">{form.formState.errors.address.message}</p> : null}
               </div>
               <div className="space-y-2">
-                <Label htmlFor="vat">VAT / Tax ID</Label>
+                <Label htmlFor="vat">VAT</Label>
                 <Input id="vat" {...form.register('vat')} />
                 {form.formState.errors.vat ? <p className="text-sm text-rose-400">{form.formState.errors.vat.message}</p> : null}
               </div>

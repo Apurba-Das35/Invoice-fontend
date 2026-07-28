@@ -45,7 +45,7 @@ export default function InvoicesPage() {
   }, [businesses, clients, filters, invoices]);
 
   const formatCurrency = (value: number, currency: string) => {
-    const symbols: Record<string, string> = { USD: '$', EUR: '€', GBP: '£' };
+    const symbols: Record<string, string> = { USD: '$', EUR: '€', GBP: ' £ ' };
     return `${symbols[currency] ?? '$'}${value.toFixed(2)}`;
   };
 
@@ -78,7 +78,7 @@ export default function InvoicesPage() {
             <Table>
               <TableHeader>
                 <TableRow>
-                  <TableHead>Invoice Number</TableHead>
+                  <TableHead>Company Name</TableHead>
                   <TableHead>Business</TableHead>
                   <TableHead>Client</TableHead>
                   <TableHead>Issue Date</TableHead>

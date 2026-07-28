@@ -47,7 +47,7 @@ export default function InvoicePreviewPage() {
     );
   }
 
-  const currencySymbol = invoice.currency === 'EUR' ? '€' : invoice.currency === 'GBP' ? '£' : '$';
+  const currencySymbol = invoice.currency === 'EUR' ? '€' : invoice.currency === 'GBP' ? ' £ ' : '$';
 
   return (
     <div className="space-y-6">
@@ -57,17 +57,7 @@ export default function InvoicePreviewPage() {
           <p className="text-sm text-slate-400">Print-ready invoice layout for sharing or downloading as a PDF.</p>
         </div>
         <div className="flex flex-wrap gap-2">
-          <Button
-            variant="secondary"
-            onClick={() => {
-              setEmailMode('resend');
-              setEmailOpen(true);
-            }}
-            className="gap-2"
-          >
-            <BellRing className="h-4 w-4" />
-            Resend Email
-          </Button>
+          
           <Button
             onClick={() => {
               setEmailMode('send');
@@ -80,7 +70,7 @@ export default function InvoicePreviewPage() {
           </Button>
           <Button onClick={() => window.print()} variant="outline" className="gap-2">
             <Printer className="h-4 w-4" />
-            Print / Download PDF
+            Export PDF
           </Button>
         </div>
       </div>
