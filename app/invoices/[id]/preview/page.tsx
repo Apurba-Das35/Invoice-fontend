@@ -57,7 +57,7 @@ export default function InvoicePreviewPage() {
           <p className="text-sm text-slate-400">Print-ready invoice layout for sharing or downloading as a PDF.</p>
         </div>
         <div className="flex flex-wrap gap-2">
-          
+
           <Button
             onClick={() => {
               setEmailMode('send');
@@ -77,7 +77,7 @@ export default function InvoicePreviewPage() {
 
       <EmailInvoiceModal open={emailOpen} onOpenChange={setEmailOpen} invoice={invoice} client={client} mode={emailMode} />
 
-      <div className="rounded-3xl border border-white/10 bg-slate-900/70 p-4 print:hidden">
+      {/* <div className="rounded-3xl border border-white/10 bg-slate-900/70 p-4 print:hidden">
         <div className="flex flex-col gap-3 rounded-2xl border border-cyan-500/20 bg-cyan-500/10 p-4 md:flex-row md:items-center md:justify-between">
           <div>
             <p className="text-sm font-semibold text-cyan-200">Automatic reminders</p>
@@ -87,64 +87,84 @@ export default function InvoicePreviewPage() {
             3 days / 7 days follow-up
           </div>
         </div>
-      </div>
+      </div> */}
 
       <Card className="overflow-hidden border border-white/10 bg-white text-slate-900 shadow-2xl">
-        <div className="bg-slate-950 px-8 py-8 text-white print:bg-white print:text-slate-900">
-          <div className="flex flex-col gap-6 md:flex-row md:items-start md:justify-between">
-            <div>
-              <div className="mb-3 flex h-12 w-12 items-center justify-center rounded-xl bg-cyan-500/20 text-sm font-semibold text-cyan-300">
+        <div className='flex justify-between'>
+
+          {/* invoices From */}
+          <div className=" px-8 py-8  print:bg-white print:text-slate-900">
+            <div className="flex flex-col gap-6 md:flex-row md:items-start md:justify-between">
+              <div>
+                <div>
+                  <p className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">FROM:</p>
+                </div>
+
+                {/* <div className="mb-3 flex h-12 w-12 items-center justify-center rounded-xl bg-cyan-500/20 text-sm font-semibold text-cyan-300">
                 {business.logo}
+              </div> */}
+
+                <h3 className="text-2xl font-semibold">{business.companyName}</h3>
+                <p className="mt-2 max-w-md text-sm ">{business.address}</p>
+                <p className="text-sm ">{business.email}</p>
+                <p className="text-sm ">{business.phone}</p>
+                <p className="mt-2 text-sm">VAT: {business.vat}</p>
               </div>
-              <h3 className="text-2xl font-semibold">{business.companyName}</h3>
-              <p className="mt-2 max-w-md text-sm text-slate-300">{business.address}</p>
-              <p className="text-sm text-slate-300">{business.email}</p>
-              <p className="text-sm text-slate-300">{business.phone}</p>
-              <p className="mt-2 text-sm text-slate-400">VAT / Tax ID: {business.vat}</p>
-            </div>
-            <div className="text-left md:text-right">
+
+              {/* <div className="text-left md:text-right">
               <p className="text-sm uppercase tracking-[0.3em] text-cyan-300">Invoice</p>
               <h2 className="mt-2 text-3xl font-semibold">{invoice.invoiceNumber}</h2>
               <div className={`mt-3 inline-flex rounded-full px-3 py-1 text-sm font-medium ${statusStyles[invoice.status]}`}>
                 {invoice.status}
               </div>
+            </div> */}
+
             </div>
+          </div>
+
+          {/* invoice Billed to  */}
+          <div className="grid gap-8  border-slate-200 bg-white p-8 md:grid-cols-2">
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">BillED TO:</p>
+              <h4 className="mt-2 text-lg font-semibold text-slate-900">{client.companyName}</h4>
+              <p className="mt-2 text-sm text-slate-600">{client.billingAddress}</p>
+              <p className="text-sm text-slate-600">{client.email}</p>
+              <p className="text-sm text-slate-600">{client.phone}</p>
+              <p className="mt-2 text-sm text-slate-500">VAT Number: {client.vatNumber}</p>
+            </div>
+
+
           </div>
         </div>
 
-        <div className="grid gap-8 border-b border-slate-200 bg-white p-8 md:grid-cols-2">
-          <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">Bill To</p>
-            <h4 className="mt-2 text-lg font-semibold text-slate-900">{client.companyName}</h4>
-            <p className="mt-2 text-sm text-slate-600">{client.billingAddress}</p>
-            <p className="text-sm text-slate-600">{client.email}</p>
-            <p className="text-sm text-slate-600">{client.phone}</p>
-            <p className="mt-2 text-sm text-slate-500">VAT Number: {client.vatNumber}</p>
+        {/* invoice date area */}
+        <div className=" flex gap-8  border-slate-200 bg-white p-8 md:justify-between">
+          <div className=" gap-3">
+            <p className="font-medium text-slate-500">INVOICE DATE</p>
+            <p className="font-semibold text-slate-900">{invoice.issueDate}</p>
           </div>
-          <div className="space-y-3 text-sm text-slate-600">
-            <div className="flex justify-between gap-3">
-              <span className="font-medium text-slate-500">Issue Date</span>
-              <span className="font-semibold text-slate-900">{invoice.issueDate}</span>
-            </div>
-            <div className="flex justify-between gap-3">
-              <span className="font-medium text-slate-500">Due Date</span>
-              <span className="font-semibold text-slate-900">{invoice.dueDate}</span>
-            </div>
-            <div className="flex justify-between gap-3">
+
+          <div className="pr-75 gap-3">
+            <p className="font-medium text-slate-500">DUE DATE</p>
+            <span className="font-semibold text-slate-900">{invoice.dueDate}</span>
+          </div>
+
+          {/* <div className="flex justify-between gap-3">
               <span className="font-medium text-slate-500">Currency</span>
               <span className="font-semibold text-slate-900">{invoice.currency}</span>
-            </div>
-          </div>
+            </div> */}
         </div>
 
+
+        {/* invoice description */}
         <div className="p-8">
           <table className="w-full border-collapse text-sm">
             <thead>
               <tr className="border-b border-slate-200 bg-slate-50 text-left text-slate-600">
-                <th className="px-3 py-3 font-semibold">Description</th>
-                <th className="px-3 py-3 font-semibold">Qty / Hours</th>
-                <th className="px-3 py-3 font-semibold">Unit Rate</th>
-                <th className="px-3 py-3 font-semibold">Amount</th>
+                <th className="px-3 py-3 font-semibold">TITLE / DESCRIPTION</th>
+                <th className="px-3 py-3 font-semibold">QTY</th>
+                <th className="px-3 py-3 font-semibold">RATE</th>
+                <th className="px-3 py-3 font-semibold">AMOUNT</th>
               </tr>
             </thead>
             <tbody>
@@ -159,10 +179,26 @@ export default function InvoicePreviewPage() {
             </tbody>
           </table>
         </div>
+        {/* Subtotal,Tax,Grand Total */}
+        <div className="grid grid-col-2 mx-7 pr-45  border-slate-200 bg-white p-4">
+          <div className="flex items-center justify-between text-sm text-slate-600 ">
+            <span>Subtotal</span>
+            <span>{currencySymbol}{invoice.subtotal.toFixed(2)}</span>
+          </div>
+          <div className="mt-3 flex items-center justify-between text-sm text-slate-600">
+            <span>Tax</span>
+            <span>{currencySymbol}{invoice.tax.toFixed(2)}</span>
+          </div>
+          <div className="mt-4 flex items-center justify-between border-t border-slate-200 pt-3   text-base font-semibold text-slate-900">
+            <span>Grand Total</span>
+            <span>{currencySymbol}{invoice.grandTotal.toFixed(2)}</span>
+          </div>
+        </div>
 
-        <div className="grid gap-8 border-t border-slate-200 bg-slate-50 p-8 md:grid-cols-[1.2fr_0.8fr]">
+        <div className="grid gap-8 border-t border-slate-200 bg-slate-50 p-8 md:grid-cols-[1.     2fr_0.8fr]">
           <div className="space-y-3">
-            <div>
+
+            {/* <div>
               <h4 className="text-sm font-semibold uppercase tracking-[0.2em] text-slate-500">Payment Instructions</h4>
               {payment ? (
                 <div className="mt-2 rounded-2xl border border-slate-200 bg-white p-4 text-sm text-slate-700">
@@ -174,7 +210,7 @@ export default function InvoicePreviewPage() {
               ) : (
                 <p className="mt-2 text-sm text-slate-500">No payment method selected.</p>
               )}
-            </div>
+            </div> */}
 
             {invoice.notes ? (
               <div>
@@ -184,20 +220,8 @@ export default function InvoicePreviewPage() {
             ) : null}
           </div>
 
-          <div className="rounded-2xl border border-slate-200 bg-white p-4">
-            <div className="flex items-center justify-between text-sm text-slate-600">
-              <span>Subtotal</span>
-              <span>{currencySymbol}{invoice.subtotal.toFixed(2)}</span>
-            </div>
-            <div className="mt-3 flex items-center justify-between text-sm text-slate-600">
-              <span>Tax</span>
-              <span>{currencySymbol}{invoice.tax.toFixed(2)}</span>
-            </div>
-            <div className="mt-4 flex items-center justify-between border-t border-slate-200 pt-3 text-base font-semibold text-slate-900">
-              <span>Grand Total</span>
-              <span>{currencySymbol}{invoice.grandTotal.toFixed(2)}</span>
-            </div>
-          </div>
+
+
         </div>
       </Card>
     </div>
