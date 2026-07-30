@@ -40,8 +40,8 @@ export function InvoiceFilterBar() {
 
   return (
     <div className="grid gap-3 rounded-3xl border border-white/10 bg-slate-900/70 p-4 md:grid-cols-2 xl:grid-cols-5">
-      <div className="relative md:col-span-2 xl:col-span-2">
-        <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-500" />
+      <div className="relative top-6 md:col-span-2 xl:col-span-2">
+        <Search className="pointer-events-none absolute left-3 top-5 h-4 w-4 -translate-y-1/2 text-slate-500" />
         <Input
           value={query}
           onChange={(event) => {

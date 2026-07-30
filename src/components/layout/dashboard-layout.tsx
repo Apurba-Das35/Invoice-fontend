@@ -16,6 +16,7 @@ import {
 } from 'lucide-react';
 import { useAppDispatch, useAppSelector } from '@/src/redux/hooks';
 import { setActiveBusiness } from '@/src/redux/slices/businessesSlice';
+import Image from 'next/image';
 
 const navigation = [
   { href: '/', label: 'Dashboard', icon: LayoutDashboard },
@@ -38,13 +39,19 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
       <div className="flex min-h-screen flex-col lg:flex-row">
         <aside className={`w-full border-b border-white/10 bg-slate-900/80 p-4 print:hidden lg:w-72 lg:border-b-0 lg:border-r ${isMenuOpen ? 'block' : 'hidden lg:block'}`}>
           <div className="mb-8 flex items-center gap-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-cyan-500/20 text-sm font-semibold text-cyan-300">
-              {activeBusiness?.logo ?? 'IN'}
-            </div>
-            <div>
-              <p className="text-sm font-semibold">InvoiceFlow</p>
-              <p className="text-xs text-slate-400">Operations Console</p>
-            </div>
+
+  <Image 
+    src="/logo.png" 
+    alt="Logo" 
+    width={24} 
+    height={24} 
+    className="object-contain  rounded-md w-8 h-8"
+  />
+
+          
+              <h1 className="text-xl text-cyan-300 md:text-2xl font-semibold">InvoiceFlow</h1>
+            
+         
           </div>
 
           <nav className="space-y-2">
@@ -87,8 +94,8 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
                   <Menu className="h-4 w-4" />
                 </button>
                 <div>
-                  <p className="text-sm text-slate-400">Overview</p>
-                  <h1 className="text-xl font-semibold text-white">Invoice Management</h1>
+                 
+                  <h1 className="text-xl text-cyan-300 font-semibold ">Invoice Management</h1>
                 </div>
               </div>
 
@@ -120,6 +127,7 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
                   <span className="absolute right-1 top-1 h-2 w-2 rounded-full bg-cyan-400" />
                 </button>
               </div> */}
+              
             </div>
           </header>
 
