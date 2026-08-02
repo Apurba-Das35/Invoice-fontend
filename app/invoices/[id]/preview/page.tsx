@@ -194,7 +194,7 @@ export default function InvoicePreviewPage() {
         </div> */}
 
         {/* invoice description */}
-        <div className="p-8">
+        <div className="pl-8 pr-8 pt-6">
           <table className="w-full border-collapse text-sm">
             <thead>
               <tr className="border-b border-slate-200 bg-slate-50 text-left text-slate-600">

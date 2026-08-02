@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { useState } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import {
   Bell,
   BriefcaseBusiness,
@@ -13,17 +13,17 @@ import {
   ReceiptText,
   Settings,
   ChevronDown,
-} from 'lucide-react';
-import { useAppDispatch, useAppSelector } from '@/src/redux/hooks';
-import { setActiveBusiness } from '@/src/redux/slices/businessesSlice';
-import Image from 'next/image';
+} from "lucide-react";
+import { useAppDispatch, useAppSelector } from "@/src/redux/hooks";
+import { setActiveBusiness } from "@/src/redux/slices/businessesSlice";
+import Image from "next/image";
 
 const navigation = [
-  { href: '/', label: 'Dashboard', icon: LayoutDashboard },
-  { href: '/businesses', label: 'Businesses', icon: Building2 },
-  { href: '/clients', label: 'Clients', icon: BriefcaseBusiness },
-  { href: '/invoices', label: 'Invoices', icon: ReceiptText },
-  { href: '/settings', label: 'Settings', icon: Settings },
+  { href: "/", label: "Dashboard", icon: LayoutDashboard },
+  { href: "/businesses", label: "Businesses", icon: Building2 },
+  { href: "/clients", label: "Clients", icon: BriefcaseBusiness },
+  { href: "/invoices", label: "Invoices", icon: ReceiptText },
+  { href: "/settings", label: "Settings", icon: Settings },
 ];
 
 export function DashboardLayout({ children }: { children: React.ReactNode }) {
@@ -31,27 +31,31 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
   const dispatch = useAppDispatch();
   const pathname = usePathname();
   const businesses = useAppSelector((state) => state.businesses.items);
-  const activeBusinessId = useAppSelector((state) => state.businesses.activeBusinessId);
-  const activeBusiness = businesses.find((business) => business.id === activeBusinessId) ?? businesses[0];
+  const activeBusinessId = useAppSelector(
+    (state) => state.businesses.activeBusinessId,
+  );
+  const activeBusiness =
+    businesses.find((business) => business.id === activeBusinessId) ??
+    businesses[0];
 
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100 ">
       <div className="flex min-h-screen flex-col lg:flex-row">
-        <aside className={`w-full border-b border-white/10 bg-slate-900/80 p-4 print:hidden lg:w-72 lg:border-b-0 lg:border-r ${isMenuOpen ? 'block' : 'hidden lg:block'}`}>
+        <aside
+          className={`w-full border-b border-white/10 bg-slate-900/80 p-4 print:hidden lg:w-72 lg:border-b-0 lg:border-r ${isMenuOpen ? "block" : "hidden lg:block"}`}
+        >
           <div className="mb-8 flex items-center gap-3">
+            <Image
+              src="/logo.png"
+              alt="Logo"
+              width={24}
+              height={24}
+              className="object-contain  rounded-md w-8 h-8"
+            />
 
-  <Image 
-    src="/logo.png" 
-    alt="Logo" 
-    width={24} 
-    height={24} 
-    className="object-contain  rounded-md w-8 h-8"
-  />
-
-          
-              <h1 className="text-xl text-cyan-300 md:text-2xl font-semibold">InvoiceFlow</h1>
-            
-         
+            <h1 className="text-xl text-cyan-300 md:text-2xl font-semibold">
+              InvoiceFlow
+            </h1>
           </div>
 
           <nav className="space-y-2">
@@ -64,7 +68,9 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
                   key={item.href}
                   href={item.href}
                   className={`flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm transition ${
-                    isActive ? 'bg-cyan-500/20 text-cyan-300' : 'text-slate-300 hover:bg-white/5 hover:text-white'
+                    isActive
+                      ? "bg-cyan-500/20 text-cyan-300"
+                      : "text-slate-300 hover:bg-white/5 hover:text-white"
                   }`}
                 >
                   <Icon className="h-4 w-4" />
@@ -79,7 +85,9 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
               <CreditCard className="h-4 w-4" />
               Working Context
             </div>
-            <p className="mt-2 text-sm text-slate-400">{activeBusiness?.companyName}</p>
+            <p className="mt-2 text-sm text-slate-400">
+              {activeBusiness?.companyName}
+            </p>
           </div>
         </aside>
 
@@ -94,8 +102,9 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
                   <Menu className="h-4 w-4" />
                 </button>
                 <div>
-                 
-                  <h1 className="text-xl text-cyan-300 font-semibold ">Invoice Management</h1>
+                  <h1 className="text-xl text-cyan-300 font-semibold ">
+                    Invoice Management
+                  </h1>
                 </div>
               </div>
 
@@ -127,7 +136,6 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
                   <span className="absolute right-1 top-1 h-2 w-2 rounded-full bg-cyan-400" />
                 </button>
               </div> */}
-              
             </div>
           </header>
 
