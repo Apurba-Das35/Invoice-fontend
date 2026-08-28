@@ -12,10 +12,10 @@ import {
   Menu,
   ReceiptText,
   Settings,
-  ChevronDown,
+  LogIn,
+  UserPlus,
 } from "lucide-react";
 import { useAppDispatch, useAppSelector } from "@/src/redux/hooks";
-import { setActiveBusiness } from "@/src/redux/slices/businessesSlice";
 import Image from "next/image";
 
 const navigation = [
@@ -48,9 +48,9 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
             <Image
               src="/logo.png"
               alt="Logo"
-              width={24}
-              height={24}
-              className="object-contain  rounded-md w-8 h-8"
+              width={32}
+              height={32}
+              className="object-contain rounded-md w-8 h-8"
             />
 
             <h1 className="text-xl text-cyan-300 md:text-2xl font-semibold">
@@ -108,34 +108,35 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
                 </div>
               </div>
 
-              {/* <div className="flex items-center gap-3">
-                <div className="relative">
-                  <button className="flex items-center gap-2 rounded-xl border border-white/10 bg-slate-800/80 px-3 py-2 text-sm text-slate-200">
-                    <BriefcaseBusiness className="h-4 w-4" />
-                    <span>{activeBusiness?.companyName}</span>
-                    <ChevronDown className="h-4 w-4" />
-                  </button>
-                  <div className="absolute right-0 mt-2 w-56 rounded-xl border border-white/10 bg-slate-900 p-2 shadow-xl">
-                    {businesses.map((business) => (
-                      <button
-                        key={business.id}
-                        onClick={() => dispatch(setActiveBusiness(business.id))}
-                        className={`flex w-full items-center justify-between rounded-lg px-3 py-2 text-left text-sm ${
-                          activeBusinessId === business.id ? 'bg-cyan-500/20 text-cyan-300' : 'text-slate-300 hover:bg-white/5'
-                        }`}
-                      >
-                        <span>{business.companyName}</span>
-                        <span className="text-xs text-slate-500">{business.defaultCurrency}</span>
-                      </button>
-                    ))}
-                  </div>
-                </div>
+              {/* Header Right Side Buttons */}
+              <div className="flex items-center gap-3">
 
-                <button className="relative rounded-xl border border-white/10 bg-slate-800/80 p-2 text-slate-200">
-                  <Bell className="h-4 w-4" />
-                  <span className="absolute right-1 top-1 h-2 w-2 rounded-full bg-cyan-400" />
-                </button>
-              </div> */}
+                {/* Dynamic Active Login Button */}
+                <Link
+                  href="/login"
+                  className={`flex items-center gap-2 rounded-xl px-3.5 py-2 text-sm font-medium transition ${
+                    pathname === "/login"
+                      ? "bg-cyan-500 text-slate-950 font-semibold"
+                      : "border border-white/10 bg-slate-800/80 text-slate-200 hover:bg-white/5 hover:text-white"
+                  }`}
+                >
+                  <LogIn className="h-4 w-4" />
+                  <span>Login</span>
+                </Link>
+
+                {/* Dynamic Active Register Button */}
+                <Link
+                  href="/register"
+                  className={`flex items-center gap-2 rounded-xl px-3.5 py-2 text-sm font-medium transition ${
+                    pathname === "/register"
+                      ? "bg-cyan-500 text-slate-950 font-semibold"
+                      : "border border-white/10 bg-slate-800/80 text-slate-200 hover:bg-white/5 hover:text-white"
+                  }`}
+                >
+                  <UserPlus className="h-4 w-4" />
+                  <span>Register</span>
+                </Link>
+              </div>
             </div>
           </header>
 
